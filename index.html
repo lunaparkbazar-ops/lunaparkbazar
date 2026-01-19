@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luna Park Bazar — Tienda</title>
+  <meta name="description" content="Luna Park Bazar - detalles lindos para cada día. Tienda online estilo pastel." />
+  <style>
+    /* -------------------------
+       Luna Park Bazar - styles
+       Single-file (HTML + CSS + JS)
+       Replace images, texts y precios según necesites
+       ------------------------- */
+    :root{
+      --bg1: #FDEFF6; /* rosa pálido */
+      --bg2: #E8F7FF; /* celeste */
+      --bg3: #F3EAFE; /* lavanda */
+      --accent: #FF9CC2; /* rosa fuerte */
+      --muted: #6B6B78;
+      --card: #ffffff;
+      --radius: 14px;
+      --shadow: 0 6px 18px rgba(20,20,40,0.08);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+      min-height:100vh;
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding-bottom:80px;
+    }
+    header{
+      display:flex;align-items:center;justify-content:space-between;padding:18px 28px;
+      backdrop-filter: blur(6px);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#FFF0F6,#FDEFF6);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:20px;box-shadow:var(--shadow);
+    }
+    .brand h1{font-size:18px;margin:0}
+    nav a{margin-left:14px;color:#333;text-decoration:none;font-weight:600}
+    .hero{
+      max-width:1100px;margin:18px auto;padding:28px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.7));box-shadow:var(--shadow);display:flex;gap:24px;align-items:center;
+    }
+    .hero .left{flex:1}
+    .hero h2{margin:0 0 8px 0;font-size:28px}
+    .hero p{margin:0 0 14px 0;color:var(--muted)}
+    .cta{display:inline-block;padding:12px 18px;border-radius:12px;background:var(--accent);color:white;text-decoration:none;font-weight:700;box-shadow:0 6px 14px rgba(255,156,194,0.22)}
+    .hero .right{width:320px}
+    .product-grid{max-width:1100px;margin:20px auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:8px}
+    .card{background:var(--card);border-radius:16px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+    .card img{width:100%;height:200px;object-fit:cover;border-radius:12px}
+    .card h3{margin:0;font-size:16px}
+    .price-row{display:flex;justify-content:space-between;align-items:center}
+    .price{font-weight:800}
+    .btn{padding:8px 12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#FFB3D6);color:white;font-weight:700;cursor:pointer}
+    /* cart */
+    .cart-btn{position:relative}
+    .cart-count{position:absolute;right:-6px;top:-8px;background:#FF6B9A;color:#fff;padding:4px 7px;border-radius:999px;font-size:12px}
+    /* cart drawer */
+    .drawer{position:fixed;right:20px;top:80px;width:360px;max-width:90%;background:var(--card);border-radius:16px;box-shadow:0 20px 40px rgba(10,10,30,0.12);padding:14px;display:none;flex-direction:column;gap:12px;z-index:40}
+    .drawer.open{display:flex}
+    .drawer h4{margin:0}
+    .cart-item{display:flex;gap:10px;align-items:center}
+    .cart-item img{width:64px;height:64px;border-radius:10px;object-fit:cover}
+    .qty{display:flex;gap:6px;align-items:center}
+    .qty button{padding:6px 8px;border-radius:8px;border:0;background:#F2F3F8;cursor:pointer}
+    footer{max-width:1100px;margin:30px auto;padding:18px;text-align:center;color:var(--muted)}
+    /* responsive */
+    @media (max-width:700px){
+      .hero{flex-direction:column;text-align:center}
+      .hero .right{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">LP</div>
+      <div>
+        <h1>Luna Park Bazar</h1>
+        <div style="font-size:12px;color:var(--muted)">Detalles lindos para cada día</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#novedades">Novedades</a>
+      <a href="#contacto">Contacto</a>
+      <button class="btn cart-btn" id="openCart">Carrito <span class="cart-count" id="cartCount">0</span></button>
+    </nav>
+  </header>
+
+  <section class="hero" role="banner">
+    <div class="left">
+      <h2>✨ Detalles lindos para cada día ✨</h2>
+      <p>En Luna Park Bazar encuentras kits, papelería y accesorios con todo el style pastel. Hecho con amor en Chile 🇨🇱</p>
+      <a href="#productos" class="cta">Ver productos</a>
+    </div>
+    <div class="right">
+      <img src="https://via.placeholder.com/420x320.png?text=Luna+Park+%F0%9F%8C%99" alt="Collage" style="width:100%;border-radius:12px;"/>
+    </div>
+  </section>
+
+  <main>
+    <h3 style="max-width:1100px;margin:12px auto 0 auto;padding:8px 12px;color:var(--muted)">Productos destacados</h3>
+    <section id="productos" class="product-grid">
+      <!-- Sample product 1 -->
+      <article class="card" data-id="prod-1" data-name="Kit Goodyear Vibes" data-price="12990">
+        <img src="https://via.placeholder.com/600x600.png?text=Kit+Goodyear" alt="Kit Goodyear Vibes"/>
+        <h3>Kit Goodyear Vibes</h3>
+        <div class="price-row">
+          <div>
+            <div style="font-size:13px;color:var(--muted)">Kit</div>
+            <div class="price">$12.990 CLP</div>
+          </div>
+          <button class="btn add-to-cart">Agregar</button>
+        </div>
+      </article>
+
+      <!-- Sample product 2 -->
+      <article class="card" data-id="prod-2" data-name="Set Papelería Pastel" data-price="7490">
+        <img src="https://via.placeholder.com/600x600.png?text=Papeleria+Pastel" alt="Set Papelería"/>
+        <h3>Set Papelería Pastel</h3>
+        <div class="price-row">
+          <div>
+            <div style="font-size:13px;color:var(--muted)">Set 7 piezas</div>
+            <div class="price">$7.490 CLP</div>
+          </div>
+          <button class="btn add-to-cart">Agregar</button>
+        </div>
+      </article>
+
+      <!-- Sample product 3 -->
+      <article class="card" data-id="prod-3" data-name="Accesorio Luna" data-price="4990">
+        <img src="https://via.placeholder.com/600x600.png?text=Accesorio+Luna" alt="Accesorio Luna"/>
+        <h3>Accesorio Luna</h3>
+        <div class="price-row">
+          <div>
+            <div style="font-size:13px;color:var(--muted)">Accesorio</div>
+            <div class="price">$4.990 CLP</div>
+          </div>
+          <button class="btn add-to-cart">Agregar</button>
+        </div>
+      </article>
+<!-- Producto: Cintillo Spa Pastel -->
+<article class="card" data-id="prod-4" data-name="Cintillo Spa Pastel" data-price="2990">
+  <img src="b39dd455-45b1-4670-9e99-7199f3f3c0d6.png" alt="Cintillo Spa Pastel" />
+  <h3>Cintillo Spa Pastel</h3>
+  <p style="font-size:13px;color:var(--muted)">
+    Descubre la suavidad y encanto de nuestros cintillos spa: perfectos para maquillaje, skincare o tus momentos de relax 🌙🛁💖  
+    Con diseños kawaii, colores pasteles y un ajuste cómodo, harán que cada ritual sea aún más especial.
+  </p>
+  <div class="price-row">
+    <div>
+      <div style="font-size:13px;color:var(--muted)">Accesorio de skincare</div>
+      <div class="price">$2.990 CLP</div>
+    </div>
+    <button class="btn add-to-cart">Agregar</button>
+  </div>
+</article>
+
+
+    </section>
+
+    <section id="novedades" style="max-width:1100px;margin:18px auto;padding:12px">
+      <div style="background:linear-gradient(90deg, rgba(243,234,254,0.9), rgba(232,247,255,0.9));padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+        <h3 style="margin:0 0 6px 0">🎁 Novedades</h3>
+        <p style="margin:0;color:var(--muted)">Pronto la edición navideña y kits especiales. Síguenos en Instagram para no perderte nada: <strong>@luna_park_bazar</strong></p>
+      </div>
+    </section>
+
+    <section id="contacto" style="max-width:1100px;margin:8px auto;padding:12px">
+      <h4>Contacto</h4>
+      <p style="color:var(--muted)">¿Dudas? Escríbenos por Instagram o al WhatsApp: <a href="https://wa.me/569XXXXXXXX">+56 9 XXXXXXXX</a></p>
+    </section>
+  </main>
+
+  <!-- Cart drawer -->
+  <aside class="drawer" id="cartDrawer" aria-hidden="true">
+    <h4>Tu carrito</h4>
+    <div id="cartItems" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px dashed #eee">
+      <div>
+        <div style="font-size:12px;color:var(--muted)">Total</div>
+        <div id="cartTotal" style="font-weight:900">$0 CLP</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" id="checkout">Pagar</button>
+        <button class="btn" id="closeCart" style="background:#F2F3F8;color:#222">Cerrar</button>
+      </div>
+    </div>
+  </aside>
+
+  <footer>
+    © 2025 Luna Park Bazar · Hecho con amor en Chile 💕
+  </footer>
+
+  <script>
+    // Simple cart logic (local, sin backend)
+    const addButtons = document.querySelectorAll('.add-to-cart');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const openCartBtn = document.getElementById('openCart');
+    const closeCartBtn = document.getElementById('closeCart');
+    const checkoutBtn = document.getElementById('checkout');
+
+    let cart = {};
+
+    function formatCLP(n){
+      return new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0}).format(n);
+    }
+
+    function updateCartUI(){
+      // update count
+      const qty = Object.values(cart).reduce((s,p)=>s+p.quantity,0);
+      cartCountEl.textContent = qty;
+      // list items
+      cartItemsEl.innerHTML = '';
+      let total = 0;
+      for(const id in cart){
+        const it = cart[id];
+        total += it.price * it.quantity;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${it.image}" alt="${it.name}" />
+          <div style="flex:1">
+            <div style="font-weight:700">${it.name}</div>
+            <div style="font-size:13px;color:var(--muted)">${formatCLP(it.price)} x ${it.quantity}</div>
+          </div>
+          <div class="qty">
+            <button data-id="${id}" class="minus">-</button>
+            <div style="min-width:18px;text-align:center">${it.quantity}</div>
+            <button data-id="${id}" class="plus">+</button>
+          </div>
+        `;
+        cartItemsEl.appendChild(div);
+      }
+      cartTotalEl.textContent = formatCLP(total);
+      if(qty===0){
+        cartItemsEl.innerHTML = '<div style="color:var(--muted)">Tu carrito está vacío</div>';
+      }
+      // attach qty buttons
+      document.querySelectorAll('.minus').forEach(btn=>btn.addEventListener('click',e=>changeQty(e.target.dataset.id,-1)));
+      document.querySelectorAll('.plus').forEach(btn=>btn.addEventListener('click',e=>changeQty(e.target.dataset.id,1)));
+    }
+
+    function changeQty(id,delta){
+      if(!cart[id]) return;
+      cart[id].quantity += delta;
+      if(cart[id].quantity<=0) delete cart[id];
+      updateCartUI();
+    }
+
+    addButtons.forEach(btn=>{
+      btn.addEventListener('click',e=>{
+        const card = e.target.closest('.card');
+        const id = card.dataset.id;
+        const name = card.dataset.name;
+        const price = Number(card.dataset.price);
+        const image = card.querySelector('img').src;
+        if(!cart[id]) cart[id] = {id,name,price,image,quantity:0};
+        cart[id].quantity += 1;
+        updateCartUI();
+        // open drawer for feedback
+        cartDrawer.classList.add('open');
+        cartDrawer.setAttribute('aria-hidden','false');
+      })
+    });
+
+    openCartBtn.addEventListener('click',()=>{
+      cartDrawer.classList.toggle('open');
+      const hidden = cartDrawer.getAttribute('aria-hidden') === 'true';
+      cartDrawer.setAttribute('aria-hidden', hidden ? 'false' : 'true');
+    });
+    closeCartBtn.addEventListener('click',()=>{
+      cartDrawer.classList.remove('open');
+      cartDrawer.setAttribute('aria-hidden','true');
+    });
+
+    checkoutBtn.addEventListener('click',()=>{
+      if(Object.keys(cart).length===0){
+        alert('Tu carrito está vacío. Agrega productos antes de pagar.');
+        return;
+      }
+      // Aquí integrarías un checkout real (e.g., Stripe, MercadoPago, TiendaNube)
+      alert('Gracias por tu compra — esto es una demo. Integra un sistema de pago para procesar órdenes.');
+    });
+
+    // inicializar
+    updateCartUI();
+  </script>
+</body>
+</html>
