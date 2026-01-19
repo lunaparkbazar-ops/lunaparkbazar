@@ -1,1 +1,7 @@
+backend:
+  name: github
+  repo: lunaparkuser/lunaparkbazar
+  branch: main
 
+media_folder: "images"
+public_folder: "/images"
