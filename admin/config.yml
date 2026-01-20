@@ -1,10 +1,7 @@
 backend:
-  name: github
-<<<<<<< HEAD
+  name: git-gateway
   repo: lunaparkbaxar-ops/lunaparkbazar
-=======
   repo: lunaparkuser/lunaparkbazar
->>>>>>> 75229e2d98e8f9586a0799d06b8f5887d3ed90f6
   branch: main
 
 media_folder: "images"
